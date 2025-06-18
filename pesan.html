@@ -1,0 +1,259 @@
+<!DOCTYPE html><html><head><title>Pesan</title></head><body><h1>Halaman Pemesanan</h1></body></html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemesanan Buket Bunga</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .modal-overlay {
+            background-color: rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="bg-pink-50 font-sans">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Main Content -->
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl font-bold text-pink-600 mb-6">Buket Bunga Cantik</h1>
+            <p class="text-lg text-gray-700 mb-8">Pesan buket bunga berkualitas untuk berbagai kesempatan spesial</p>
+            
+            <button 
+                id="orderBtn"
+                class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 transform hover:scale-105"
+            >
+                <i class="fas fa-shopping-cart mr-2"></i> Pesan Sekarang
+            </button>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-green-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-rose text-green-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-pink-600 mb-2">Buket Mawar</h3>
+                    <p class="text-gray-600">Buket mawar segar dengan berbagai pilihan warna</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-pink-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-spa text-pink-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-pink-600 mb-2">Buket Campur</h3>
+                    <p class="text-gray-600">Kombinasi berbagai bunga segar yang harmonis</p>
+                </div>
+                
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition duration-300">
+                    <div class="bg-yellow-100 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-gift text-yellow-500 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-pink-600 mb-2">Buket Hadiah</h3>
+                    <p class="text-gray-600">Buket bunga lengkap dengan aksesoris cantik</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Order Modal -->
+        <div id="orderModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div class="modal-overlay absolute inset-0"></div>
+            
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 relative z-10 fade-in">
+                <div class="p-6">
+                    <div class="flex justify-between items-center mb-6">
+                        <h2 class="text-2xl font-bold text-pink-600">Form Pemesanan</h2>
+                        <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+                            <i class="fas fa-times text-xl"></i>
+                        </button>
+                    </div>
+                    
+                    <form id="orderForm" class="space-y-4">
+                        <div>
+                            <label for="fullname" class="block text-sm font-medium text-gray-700 mb-1">Nama Lengkap</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-user text-gray-400"></i>
+                                </div>
+                                <input 
+                                    type="text" 
+                                    id="fullname" 
+                                    required
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                                    placeholder="Masukkan nama lengkap"
+                                >
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="whatsapp" class="block text-sm font-medium text-gray-700 mb-1">Nomor WhatsApp</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-phone text-gray-400"></i>
+                                </div>
+                                <input 
+                                    type="tel" 
+                                    id="whatsapp" 
+                                    required
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                                    placeholder="Contoh: 081234567890"
+                                >
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Alamat Lengkap</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 pt-3 flex items-start pointer-events-none">
+                                    <i class="fas fa-map-marker-alt text-gray-400"></i>
+                                </div>
+                                <textarea 
+                                    id="address" 
+                                    rows="3"
+                                    required
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                                    placeholder="Masukkan alamat lengkap pengiriman"
+                                ></textarea>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label for="product" class="block text-sm font-medium text-gray-700 mb-1">Pilih Produk</label>
+                            <div class="relative">
+                                <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                                    <i class="fas fa-shopping-basket text-gray-400"></i>
+                                </div>
+                                <select 
+                                    id="product" 
+                                    required
+                                    class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-pink-500 focus:border-pink-500 appearance-none"
+                                >
+                                    <option value="" disabled selected>Pilih buket bunga</option>
+                                    <option value="Buket Mawar Merah">Buket Mawar Merah - Rp 150.000</option>
+                                    <option value="Buket Mawar Putih">Buket Mawar Putih - Rp 140.000</option>
+                                    <option value="Buket Campur">Buket Campur - Rp 180.000</option>
+                                    <option value="Buket Special">Buket Special - Rp 250.000</option>
+                                    <option value="Buket Premium">Buket Premium - Rp 350.000</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Metode Pembayaran</label>
+                            <div class="space-y-2">
+                                <div class="flex items-center">
+                                    <input 
+                                        type="radio" 
+                                        id="bankTransfer" 
+                                        name="payment" 
+                                        value="Transfer Bank" 
+                                        class="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+                                        checked
+                                    >
+                                    <label for="bankTransfer" class="ml-2 block text-sm text-gray-700">
+                                        Transfer Bank
+                                    </label>
+                                </div>
+                                <div class="flex items-center">
+                                    <input 
+                                        type="radio" 
+                                        id="eWallet" 
+                                        name="payment" 
+                                        value="E-Wallet" 
+                                        class="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300"
+                                    >
+                                    <label for="eWallet" class="ml-2 block text-sm text-gray-700">
+                                        E-Wallet (OVO/DANA/ShopeePay)
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <button 
+                            type="submit" 
+                            class="w-full bg-green-400 hover:bg-green-500 text-white font-bold py-3 px-4 rounded-full shadow-md transition duration-300 flex items-center justify-center"
+                        >
+                            <i class="fas fa-paper-plane mr-2"></i> Kirim Pesanan
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Success Modal -->
+        <div id="successModal" class="fixed inset-0 z-50 flex items-center justify-center hidden">
+            <div class="modal-overlay absolute inset-0"></div>
+            
+            <div class="bg-white rounded-xl shadow-2xl w-full max-w-md mx-4 relative z-10 fade-in p-8 text-center">
+                <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <i class="fas fa-check text-green-500 text-3xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-pink-600 mb-4">Terima kasih!</h2>
+                <p class="text-gray-700 mb-6">Pesanan Anda sedang diproses.</p>
+                <p class="text-sm text-gray-500 mb-6">Kami akan menghubungi Anda via WhatsApp untuk konfirmasi lebih lanjut.</p>
+                <button 
+                    id="closeSuccessModal" 
+                    class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-6 rounded-full shadow-md transition duration-300"
+                >
+                    Tutup
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Modal Handling
+        const orderBtn = document.getElementById('orderBtn');
+        const orderModal = document.getElementById('orderModal');
+        const closeModal = document.getElementById('closeModal');
+        const orderForm = document.getElementById('orderForm');
+        const successModal = document.getElementById('successModal');
+        const closeSuccessModal = document.getElementById('closeSuccessModal');
+        
+        orderBtn.addEventListener('click', () => {
+            orderModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        });
+        
+        closeModal.addEventListener('click', () => {
+            orderModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+        });
+        
+        closeSuccessModal.addEventListener('click', () => {
+            successModal.classList.add('hidden');
+            orderModal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            orderForm.reset();
+        });
+        
+        orderForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // Here you would typically send the form data to your backend
+            // For this example, we'll just show the success message
+            
+            orderModal.classList.add('hidden');
+            successModal.classList.remove('hidden');
+        });
+        
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === orderModal) {
+                orderModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === successModal) {
+                successModal.classList.add('hidden');
+                document.body.style.overflow = 'auto';
+                orderForm.reset();
+            }
+        });
+    </script>
+</body>
+</html>
